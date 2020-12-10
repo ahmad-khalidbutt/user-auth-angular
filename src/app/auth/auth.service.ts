@@ -21,7 +21,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     let authMeta = localStorage.getItem('auth_meta');
-    authMeta ? (this.decodedToken = JSON.parse(authMeta)) : new DecodedToken();
+    this.decodedToken = JSON.parse(authMeta) || new DecodedToken();
   }
 
   public register(userData: any): Observable<any> {
