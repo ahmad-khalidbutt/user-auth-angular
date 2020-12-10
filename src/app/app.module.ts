@@ -13,6 +13,7 @@ import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppInterceptor } from './interceptors/app.interceptor';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AppInterceptor } from './interceptors/app.interceptor';
     HeaderComponent,
     ProfileComponent,
     AuthComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

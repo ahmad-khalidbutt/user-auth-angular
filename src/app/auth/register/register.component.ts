@@ -31,10 +31,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log(this.registrationForm);
-  }
-
   register(): void {
     this.auth.register(this.registrationForm.value).subscribe(
       () => {
