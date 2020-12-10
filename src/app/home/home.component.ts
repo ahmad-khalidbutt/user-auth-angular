@@ -7,15 +7,15 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  notify: string = false;
+  notify: string = '';
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      const keyOne = 'loggedin';
-      if (params[keyOne] === 'success') {
-        this.notify = 'You have been successfully logged in. Welcome Home';
+      const key1 = 'loggedin';
+      if (params[key1] === 'success') {
+        this.notify = 'You have been successfully loggedin. Welcome home';
       }
     });
   }
