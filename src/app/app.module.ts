@@ -9,8 +9,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppInterceptor } from './interceptors/app.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,12 @@ import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
     AppRoutingModule,
     AuthModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     NgBootstrapFormValidationModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

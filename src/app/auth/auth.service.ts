@@ -20,8 +20,8 @@ export class AuthService {
   private decodedToken: any;
 
   constructor(private http: HttpClient) {
-    this.decodedToken =
-      JSON.parse(localStorage.getItem('auth_meta')) || new DecodedToken();
+    let authMeta = localStorage.getItem('auth_meta');
+    authMeta ? (this.decodedToken = JSON.parse(authMeta)) : new DecodedToken();
   }
 
   public register(userData: any): Observable<any> {
@@ -58,5 +58,12 @@ export class AuthService {
 
   public getUsername(): string {
     return this.decodedToken.username;
+  }
+
+  public getToken(): any {
+    let authToken = localStorage.getItem('auth_tkn');
+    if (authToken) {
+      return authToken;
+    }
   }
 }
