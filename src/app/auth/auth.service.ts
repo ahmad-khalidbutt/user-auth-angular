@@ -66,18 +66,4 @@ export class AuthService {
       return `Bearer ${authToken}`;
     }
   }
-
-  public getUsers(): Observable<any> {
-    const URI = this.uriseg + '/';
-    return this.http.get(URI).pipe(
-      map((users) => {
-        return users;
-      })
-    );
-  }
-
-  public deleteUser(id: number): Observable<any> {
-    const URI = `${this.uriseg}/${id}`;
-    return this.http.delete(URI);
-  }
 }

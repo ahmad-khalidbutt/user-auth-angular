@@ -14,6 +14,8 @@ import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppInterceptor } from './interceptors/app.interceptor';
 import { UsersComponent } from './users/users.component';
+import {UsersModule} from './users/users.module';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { UsersComponent } from './users/users.component';
     BrowserModule,
     AppRoutingModule,
     AuthModule,
+    UsersModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NgBootstrapFormValidationModule.forRoot(),
