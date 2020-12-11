@@ -23,4 +23,13 @@ export class UserService {
     const URI = `${this.uriseg}/${id}`;
     return this.http.delete(URI);
   }
+
+  public getCurrentUser(): Observable<any> {
+    const URI = this.uriseg + '/current';
+    return this.http.get(URI).pipe(
+      map((user) => {
+        return user;
+      })
+    );
+  }
 }

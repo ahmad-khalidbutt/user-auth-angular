@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../users/user.service';
 import { AuthService } from './../auth/auth.service';
+import { User } from '../users/user.interface';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +11,32 @@ import { AuthService } from './../auth/auth.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(public auth: AuthService) {}
+  profileForm: FormGroup | any;
+  errors: Array<string> = [];
+  constructor(public auth: AuthService, public user: UserService) {}
+  currentUser: User;
+  ngOnInit(): void {
+    this.user.getCurrentUser().subscribe((user) => {
+      if (user) {
+        this.currentUser = user;
+      }
+    });
+    this.profileForm = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(20),
+      ]),
+    });
+  }
 
-  ngOnInit(): void {}
+  saveUser(): void {
+    console.log(this.profileForm.value);
+  }
 }
