@@ -13,30 +13,40 @@ import { Validators } from '@angular/forms';
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup | any;
   errors: Array<string> = [];
+  messages: Array<string> = [];
   constructor(public auth: AuthService, public user: UserService) {}
   currentUser: User;
   ngOnInit(): void {
     this.user.getCurrentUser().subscribe((user) => {
       if (user) {
         this.currentUser = user;
+        this.profileForm = new FormGroup({
+          firstName: new FormControl(
+            this.currentUser.firstName,
+            Validators.required
+          ),
+          lastName: new FormControl(
+            this.currentUser.lastName,
+            Validators.required
+          ),
+          username: new FormControl(this.currentUser.username, [
+            Validators.required,
+            Validators.minLength(5),
+          ]),
+          password: new FormControl('', [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(20),
+          ]),
+        });
       }
-    });
-    this.profileForm = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      username: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(20),
-      ]),
     });
   }
 
   saveUser(): void {
-    console.log(this.profileForm.value);
+    let { id } = this.currentUser;
+    this.user.updateUser(id, this.profileForm.value).subscribe(() => {
+      this.messages.push('Profile Updated 😃');
+    });
   }
 }

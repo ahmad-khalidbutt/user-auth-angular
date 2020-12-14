@@ -9,9 +9,6 @@
         {{ message }}
       </div>
     </div>
-    <div class="addbtn">
-      <button class="btn btn-outline-success">+ Add</button>
-    </div>
     <table class="table" *ngIf="users.length">
       <caption>
         List of users
@@ -40,7 +37,6 @@
             {{ user.lastName }}
           </td>
           <td>
-            <button class="btn btn-sm btn-outline-primary">Update</button>
             <button
               class="btn btn-sm btn-outline-danger"
               (click)="deleteRow(user)"

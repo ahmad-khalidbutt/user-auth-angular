@@ -32,4 +32,9 @@ export class UserService {
       })
     );
   }
+
+  public updateUser(id, userData): Observable<any> {
+    const URI = `${this.uriseg}/${id}`;
+    return this.http.put(URI, userData);
+  }
 }

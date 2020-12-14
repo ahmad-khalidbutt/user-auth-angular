@@ -1,36 +1,32 @@
 <div class="container justify-content-center marge">
+  <div *ngIf="messages.length">
+    <div *ngFor="let message of messages">
+      <div class="alert alert-success" role="alert">
+        {{ message }}
+      </div>
+    </div>
+  </div>
   <div class="row justify-content-center">
     <h2><strong>Hi, </strong>{{ auth.getUsername() }} ! 👋🏻</h2>
   </div>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <form [formGroup]="profileForm" (validSubmit)="saveUser()">
+      <form
+        *ngIf="this.currentUser"
+        [formGroup]="profileForm"
+        (validSubmit)="saveUser()"
+      >
         <div class="form-group">
           <label class="control-label">First Name</label>
-          <input
-            type="text"
-            [defaultValue]="this.currentUser && this.currentUser.firstName"
-            class="form-control"
-            formControlName="firstName"
-          />
+          <input type="text" class="form-control" formControlName="firstName" />
         </div>
         <div class="form-group">
           <label class="control-label">Last Name</label>
-          <input
-            type="text"
-            [defaultValue]="this.currentUser && this.currentUser.lastName"
-            class="form-control"
-            formControlName="lastName"
-          />
+          <input type="text" class="form-control" formControlName="lastName" />
         </div>
         <div class="form-group">
           <label class="control-label">Username</label>
-          <input
-            type="text"
-            [defaultValue]="this.currentUser && this.currentUser.username"
-            class="form-control"
-            formControlName="username"
-          />
+          <input type="text" class="form-control" formControlName="username" />
         </div>
         <div class="form-group">
           <label class="control-label">Password</label>
@@ -38,7 +34,6 @@
             type="password"
             class="form-control"
             formControlName="password"
-            [defaultValue]="12345678"
           />
         </div>
         <div class="d-flex justify-content-center align-items-center">
